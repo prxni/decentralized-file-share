@@ -32,12 +32,7 @@ contract HashStorage is Ownable {
         uint256 _dateAdded,
         address recipient,
         address authorizedRecipient
-    ) public onlyOwner {
-        require(
-            authorizedRecipient == address(0x4DB2a8e8a9D35B3a850d9Dc43c334104B8a3Ca85), // ✅ Fix: Correct address comparison
-            "Not authorized to access"
-        );
-
+    ) public  {
         require(!collection[_filehash].exist, "File already uploaded");
 
         collection[_filehash] = DocInfo(_ipfshash, _dateAdded, true, recipient);
@@ -61,7 +56,6 @@ contract HashStorage is Ownable {
     function getHashFromAddress(address _address)
         public
         view
-        onlyOwner
         returns (string[] memory, string[] memory)
     {
         Info[] storage arr = addressToHash[_address];
